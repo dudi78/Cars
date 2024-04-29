@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a Car</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/updatecar.css">
+
+
+</head>
+<body>
+
+<div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">Menu</a>
+</div>
+
+<button class="button" onclick="document.getElementById('popup').style.display='block'" style="margin-top: 2% ;margin-left: 2%">Add a Car</button>
+
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+
+        <form id="carForm" action="" method="POST" enctype="multipart/form-data" style="transform: scale(0.9);">
+
+            <div class="form-group" style="display: flex; flex-wrap: wrap;">
+                <input type="text" name="model" placeholder="&#xf1b9; Enter model" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="text" name="price" placeholder="&#xf155; Enter Price" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
+            </div>
+
+            <div class="form-group" style="display: flex; flex-wrap: wrap;">
+                <input type="text" name="year" placeholder="&#xf271; Enter Year" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="text" name="color" placeholder="&#xf1fc; Enter Color" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome,serif;">
+            </div>
+
+            <div class="form-group" style="display: flex; flex-wrap: wrap;">
+                <input type="text" name="mileage" placeholder="&#xf5db; Enter Mileage" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="text" name="engineType" placeholder="&#xf1b9; Enter Engine Type" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome,serif;">
+            </div>
+
+            <div class="form-group" style="display: flex; flex-wrap: wrap;">
+                <input type="text" name="transmission" placeholder="&#xf1c0; Enter Transmission" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="text" name="fuelType" placeholder="&#xf52f; Enter Fuel Type" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
+            </div>
+
+            <div class="form-group" style="display: flex; flex-wrap: wrap;">
+                <input type="text" name="description" placeholder="&#xf0f6; Enter Description" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="file" name="image1" placeholder="&#xf030; Add Photos" style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
+                <input type="file" name="image2" placeholder="&#xf030; Add Photos" style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="file" name="image3" placeholder="&#xf030; Add Photos" style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
+            </div>
+
+            <div class="form-group" style="display: flex; justify-content: space-between;">
+                <button type="submit" class="submit-btn">Add Car !</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Cards Section -->
+    <div class="card-container">
+        <div class="card">
+            <img src="bwm.jpg" alt="Car Model 1" class="card-img">
+            <div class="card-details">
+                <p>Car Model 1</p>
+                <p>Price: $10,000</p>
+                <p>Year: 2022</p>
+                <p>Color: Red</p>
+                <p>Mileage: 50,000 miles</p>
+                <p>Engine Type: V6</p>
+                <p>Transmission: Automatic</p>
+                <p>Fuel Type: Petrol</p>
+                <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <div class="card-buttons">
+                    <button class="button" onclick="openPopup()" >Update</button>
+                    <button class="button" >Delete</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function openPopup() {
+        var popup = document.getElementById('popup');
+        popup.style.display = 'block';
+
+        var buttonName = event.target.innerHTML.trim();
+        if (buttonName === 'Update') {
+            var submitBtn = document.querySelector('.submit-btn');
+            submitBtn.innerHTML = 'Submit Changes';
+        }
+    }
+    function closePopup() {
+        var popup = document.getElementById('popup');
+        popup.style.display = 'none';
+
+        var submitBtn = document.querySelector('.submit-btn');
+        submitBtn.innerHTML = 'Add Car !';
+    }
+    document.getElementById('carForm').addEventListener('submit', function() {
+        document.querySelector('.submit-btn').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>

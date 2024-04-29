@@ -1,0 +1,48 @@
+
+
+body {
+    background-image: url('/static/imgs/berlin.jpg');
+    color: rgba(255, 255, 255, 0.69);
+    padding-top: 0;
+    font-family: 'Arial', sans-serif;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.navbar {
+    background-color: rgb(33, 33, 33);
+}
+.navbar-brand {
+    color: #fff;
+}
+.navbar-nav .nav-link {
+    color: #fff;
+}
+.register-box {
+    width: 500px;
+    margin-left: 25%;
+    background-color: rgba(138, 69, 24, 0.02);
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.register-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(56, 171, 206, 0.83);
+}
+.form-group label {
+    font-weight: bold;
+}
+.form-control {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #fff;
+}
+.btn-primary {
+    background-color: #1f9eb4;
+    border-color: #ffffff;
+}
+.btn-primary:hover {
+    background-color: rgba(89, 165, 255, 0.84);
+    border-color: #ffffff;
+}

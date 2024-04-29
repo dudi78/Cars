@@ -1,0 +1,44 @@
+.navbar {
+    background-color: rgb(33, 33, 33);
+}
+.navbar-brand {
+    color: #fff;
+}
+.navbar-nav .nav-link {
+    color: #fff;
+}
+/* Custom CSS */
+.car-details, .owner-details, .car-owner {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-top: 20px;
+}
+.owner-profile, .car-details, .car-description {
+    border: 2px solid #1f9eb4;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.owner-profile h4, .car-details h4, .car-description h4 {
+    margin-top: 0;
+    color: #1f9eb4;
+    font-weight: bold;
+}
+.owner-profile p, .car-details p, .car-description p {
+    margin-bottom: 5px;
+    color: #333;
+}
+.owner-profile p strong, .car-details p strong, .car-description p strong {
+    color: #1f9eb4;
+}
+.car-images img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+/* Icon Styles */
+.fa {
+    margin-right: 10px;
+    color: #00a6ff;
+}

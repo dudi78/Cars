@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/home.css" >
+</head>
+<body>
+
+
+<nav class="navbar">
+    <ul class="nav-list">
+        <li><a th:href="@{'/Register'}">Register</a></li>
+        <li><a th:href="@{'/login'}">Login</a></li>
+        <li><a th:href="@{'/About'}">About</a></li>
+        <li><a th:href="@{'/Annonces'}">Cars</a></li>
+    </ul>
+</nav>
+<div class="video-container">
+    <video autoplay loop muted>
+        <source src="/imgs/car.mp4" type="video/mp4">
+
+    </video>
+    <div class="content">
+        <h1>Welcome to Our Website</h1>
+        <p>Discover amazing cars and more.</p>
+    </div>
+</div>
+</body>
+</html>
