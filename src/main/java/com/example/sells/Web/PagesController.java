@@ -18,10 +18,6 @@ public class PagesController {
 
 
 
-    @GetMapping("/Annonces")
-    public String ads(){
-        return "annoncesPage";
-    }
 
     @GetMapping("/About")
     public String about(){
