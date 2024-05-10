@@ -24,10 +24,6 @@ public class PagesController {
         return"About";
     }
 
-    @GetMapping("/managecar")
-    public String carmanage(){
-        return"UpdateCar";
-    }
 
 
     @GetMapping("/CarDetails")

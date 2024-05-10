@@ -9,7 +9,17 @@
 <body>
 
 
-<nav class="navbar">
+<nav  th:if="${#authentication.principal != null}" class="navbar" >
+    <ul class="nav-list">
+        <li><a th:href="@{'/Register'}">Register</a></li>
+        <li><a th:href="@{'/login'}">Login</a></li>
+        <li><a th:href="@{'/About'}">About</a></li>
+        <li><a th:href="@{'/Annonces'}">Cars</a></li>
+    </ul>
+</nav>
+
+
+<nav  th:if="${#authentication.principal == null}" class="navbar" >
     <ul class="nav-list">
         <li><a th:href="@{'/Register'}">Register</a></li>
         <li><a th:href="@{'/login'}">Login</a></li>

@@ -19,11 +19,13 @@ public class Annonce {
 
     @ManyToOne
     private Customer customer;
+
     @ManyToOne
     private Admin admin;
 
-    @OneToOne(mappedBy = "annonce")
+    @OneToOne(mappedBy = "annonce", cascade = CascadeType.ALL)
     private Car car;
+
 
     private String description;
 

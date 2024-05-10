@@ -13,12 +13,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Service
 public class Annonceimp  implements AnnonceManager{
+
 @Autowired
 AnnonceRepository ar;
+@Autowired
+CarRepository cr;
 private static final String UPLOAD_DIR = "uploads/";
 
     @Autowired
@@ -30,21 +34,35 @@ private static final String UPLOAD_DIR = "uploads/";
     }
 
     @Override
+    public Annonce findannoncebyid(Integer id) {
+        return ar.findAnnonceById(id);
+    }
+
+
+    @Override
+    public List<Annonce> findCustomerAdsByUsername(String username) {
+        List<Annonce> ads = ar.findByCustomerNomUtilisateur(username);
+        if (ads.isEmpty()) {
+            System.out.println("No ads found for user: " + username);
+        } else {
+            System.out.println("Ads found for user: " + username);
+        }
+        return ads;
+    }
+
     public String saveImage(MultipartFile image2) throws IOException{
-        // Generate a unique file name
+
         String fileName = UUID.randomUUID().toString() + "_" + image2.getOriginalFilename();
 
-        // Get the path to save the file
+
         Path uploadPath = Paths.get(UPLOAD_DIR);
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
-        // Save the file to the upload directory
         Path filePath = uploadPath.resolve(fileName);
         Files.copy(image2.getInputStream(), filePath);
 
-        // Return the path to the saved file
         return filePath.toString();
     }
 

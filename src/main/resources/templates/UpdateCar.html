@@ -15,7 +15,7 @@
     <a href="#">Menu</a>
 </div>
 
-<button class="button" onclick="document.getElementById('popup').style.display='block'" style="margin-top: 2% ;margin-left: 2%">Add a Car</button>
+<button class="button" onclick="document.getElementById('popup').style.display='block'" style="margin-top: 2% ;margin-bottom: 2%;margin-left: 2%">Add a Car</button>
 
 <div id="popup" class="popup">
     <div class="popup-content">
@@ -24,30 +24,30 @@
         <form id="carForm"  action="/save-annonce" method="POST" enctype="multipart/form-data" style="transform: scale(0.9);">
 
             <div class="form-group" style="display: flex; flex-wrap: wrap;">
-                <input type="text" name="model" placeholder="&#xf1b9; Enter model" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
-                <input type="text" name="price" placeholder="&#xf155; Enter Price" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
+                <input type="text" name="model" placeholder=" Enter model" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="text" name="price" placeholder=" Enter Price" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
             </div>
 
             <div class="form-group" style="display: flex; flex-wrap: wrap;">
-                <input type="text" name="year" placeholder="&#xf271; Enter Year" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
-                <input type="text" name="color" placeholder="&#xf1fc; Enter Color" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome,serif;">
+                <input type="text" name="year" placeholder=" Enter Year" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="text" name="color" placeholder="Enter Color" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome,serif;">
             </div>
 
             <div class="form-group" style="display: flex; flex-wrap: wrap;">
-                <input type="text" name="mileage" placeholder="&#xf5db; Enter Mileage" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
-                <input type="text" name="engineType" placeholder="&#xf1b9; Enter Engine Type" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome,serif;">
+                <input type="text" name="mileage" placeholder=" Enter Mileage" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="text" name="engineType" placeholder="Enter Engine Type" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome,serif;">
             </div>
 
             <div class="form-group" style="display: flex; flex-wrap: wrap;">
-                <input type="text" name="transmission" placeholder="&#xf1c0; Enter Transmission" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
-                <input type="text" name="fuelType" placeholder="&#xf52f; Enter Fuel Type" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
+                <input type="text" name="transmission" placeholder=" Enter Transmission" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="text" name="fuelType" placeholder=" Enter Fuel Type" required style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
             </div>
 
             <div class="form-group" style="display: flex; flex-wrap: wrap;">
-                <input type="text" name="description" placeholder="&#xf0f6; Enter Description" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
-                <input type="file" name="image1" placeholder="&#xf030; Add Photos" style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
-                <input type="file" name="image2" placeholder="&#xf030; Add Photos" style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
-                <input type="file" name="image3" placeholder="&#xf030; Add Photos" style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
+                <input type="text" name="description" placeholder=" Enter Description" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="file" name="image1" placeholder=" Add Photos" style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
+                <input type="file" name="image2" placeholder=" Add Photos" style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <input type="file" name="image3" placeholder=" Add Photos" style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
             </div>
 
             <div class="form-group" style="display: flex; justify-content: space-between;">
@@ -56,53 +56,75 @@
         </form>
     </div>
 </div>
-
-<div class="container">
-    <!-- Cards Section -->
-    <div class="card-container">
-        <div class="card">
-            <img src="bwm.jpg" alt="Car Model 1" class="card-img">
-            <div class="card-details">
-                <p>Car Model 1</p>
-                <p>Price: $10,000</p>
-                <p>Year: 2022</p>
-                <p>Color: Red</p>
-                <p>Mileage: 50,000 miles</p>
-                <p>Engine Type: V6</p>
-                <p>Transmission: Automatic</p>
-                <p>Fuel Type: Petrol</p>
-                <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <div class="card-buttons">
-                    <button class="button" onclick="openPopup()" >Update</button>
-                    <button class="button" >Delete</button>
-                </div>
+<div th:each="ad : ${customerAds}" th:if="${ad.car != null}" style="margin-left: 14%; width: 1000px;">
+    <div class="card">
+        <img src="/imgs/BWM.jpg" alt="Car Image" class="card-img">
+        <div class="card-details">
+            <p>
+                <i class="fas fa-car"></i> <!-- Car icon -->
+                <span th:text="'Model: ' + ${ad.car.getModel()}"></span>
+            </p>
+            <p>
+                <i class="fas fa-dollar-sign"></i> <!-- Dollar sign icon -->
+                <span th:text="'Price: ' + ${ad.car.getPrice()}"></span>
+            </p>
+            <p>
+                <i class="fas fa-calendar-alt"></i> <!-- Calendar icon -->
+                <span th:text="'Year: ' + ${ad.car.getCar_year()}"></span>
+            </p>
+            <p>
+                <i class="fas fa-paint-brush"></i> <!-- Color palette icon -->
+                <span th:text="'Color: ' + ${ad.car.getColor()}"></span>
+            </p>
+            <p>
+                <i class="fas fa-tachometer-alt"></i> <!-- Tachometer icon -->
+                <span th:text="'Mileage: ' + ${ad.car.getMileage()} + ' miles'"></span>
+            </p>
+            <p>
+                <i class="fas fa-info-circle"></i> <!-- Info circle icon -->
+                <span th:text="'Description: ' + ${ad.getDescription()}"></span>
+            </p>
+            <p>
+                <i class="fas fa-cogs"></i> <!-- Cogs icon -->
+                <span th:text="'Transmission: ' + ${ad.car.getTransmission()}"></span>
+            </p>
+            <p>
+                <i class="fas fa-gas-pump"></i> <!-- Gas pump icon -->
+                <span th:text="'FuelType: ' + ${ad.car.getFuelType()}"></span>
+            </p>
+            <p>
+                <i class="fas fa-engine"></i> <!-- Engine icon -->
+                <span th:text="'EngineType: ' + ${ad.car.getEngineType()}"></span>
+            </p>
+            <div class="card-buttons">
+                <a th:href="@{'/deleteannonce/' + ${ad.car.getId()}}" class="button">Delete</a>
+                <a th:href="@{'/Updateannonce/' + ${ad.getId()}} " class="button">Update</a>
             </div>
         </div>
-
     </div>
 </div>
 
-<script>
-    function openPopup() {
-        var popup = document.getElementById('popup');
-        popup.style.display = 'block';
 
-        var buttonName = event.target.innerHTML.trim();
-        if (buttonName === 'Update') {
-            var submitBtn = document.querySelector('.submit-btn');
-            submitBtn.innerHTML = 'Submit Changes';
-        }
-    }
+
+
+
+
+<script >
+
+
+
+
+
+
+
     function closePopup() {
         var popup = document.getElementById('popup');
         popup.style.display = 'none';
 
-        var submitBtn = document.querySelector('.submit-btn');
-        submitBtn.innerHTML = 'Add Car !';
-    }
-    document.getElementById('carForm').addEventListener('submit', function() {
-        document.querySelector('.submit-btn').style.display = 'none';
-    });
+
+
+
+    };
 </script>
 
 </body>

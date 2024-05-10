@@ -14,7 +14,8 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
@@ -32,7 +33,7 @@ public class SecurityConfig {
 
                         ).authenticated()
                         .requestMatchers("/h2-console/",
-                                "/Register","/login","/myhome","/CarDetails","/Annonces","/imgs/**","/css/**"
+                                "/Register","/login","/myhome","/CarDetails","/Annonces","//Sells/uploads/**","/imgs/**","/css/**"
                         ).permitAll()
                 );
 
@@ -64,6 +65,7 @@ public class SecurityConfig {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService);
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
