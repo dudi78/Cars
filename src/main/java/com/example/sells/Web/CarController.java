@@ -19,6 +19,6 @@ public class CarController {
     public String DeleteAnnonceCar(@PathVariable Integer carId){
 
         boolean b= cm.deleteCarAndAssociatedAnnonce(carId);
-        return "HomePage";
+        return "UpdateCar";
     }
 }

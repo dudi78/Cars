@@ -9,24 +9,19 @@
 <body>
 
 
-<nav  th:if="${#authentication.principal != null}" class="navbar" >
+
+
+<nav   class="navbar" >
     <ul class="nav-list">
         <li><a th:href="@{'/Register'}">Register</a></li>
         <li><a th:href="@{'/login'}">Login</a></li>
         <li><a th:href="@{'/About'}">About</a></li>
-        <li><a th:href="@{'/Annonces'}">Cars</a></li>
+        <li><a th:href="@{'/ads'}">Cars</a></li>
     </ul>
 </nav>
 
 
-<nav  th:if="${#authentication.principal == null}" class="navbar" >
-    <ul class="nav-list">
-        <li><a th:href="@{'/Register'}">Register</a></li>
-        <li><a th:href="@{'/login'}">Login</a></li>
-        <li><a th:href="@{'/About'}">About</a></li>
-        <li><a th:href="@{'/Annonces'}">Cars</a></li>
-    </ul>
-</nav>
+
 <div class="video-container">
     <video autoplay loop muted>
         <source src="/imgs/car.mp4" type="video/mp4">

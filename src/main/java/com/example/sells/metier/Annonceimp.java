@@ -38,6 +38,11 @@ private static final String UPLOAD_DIR = "uploads/";
         return ar.findAnnonceById(id);
     }
 
+    @Override
+    public List<Annonce> findallannonces() {
+        return ar.findAll();
+    }
+
 
     @Override
     public List<Annonce> findCustomerAdsByUsername(String username) {

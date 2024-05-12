@@ -14,6 +14,7 @@ import java.util.List;
 
 public interface AnnonceRepository extends JpaRepository<Annonce,Integer> {
     List<Annonce> findByCustomerNomUtilisateur(String nomUtilisateur);
+    List<Annonce> findAll();
     boolean removeAnnonceById(Integer id);
     Annonce findAnnonceById(Integer id);
 }

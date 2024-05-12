@@ -11,8 +11,8 @@
 <body>
 
 <div class="navbar">
-    <a href="#">Home</a>
-    <a href="#">Menu</a>
+    <a th:href="@{'/home'}">Home</a>
+    <a th:href="${'/profile'}">Menu</a>
 </div>
 
 <button class="button" onclick="document.getElementById('popup').style.display='block'" style="margin-top: 2% ;margin-bottom: 2%;margin-left: 2%">Add a Car</button>
@@ -21,7 +21,7 @@
     <div class="popup-content">
         <span class="close" onclick="closePopup()">&times;</span>
 
-        <form id="carForm"  action="/save-annonce" method="POST" enctype="multipart/form-data" style="transform: scale(0.9);">
+        <form id="carForm"   onclick="document.getElementById('carForm').addEventListener('submit', handleSubmit);" method="POST" enctype="multipart/form-data" style="transform: scale(0.9);">
 
             <div class="form-group" style="display: flex; flex-wrap: wrap;">
                 <input type="text" name="model" placeholder=" Enter model" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
@@ -44,7 +44,7 @@
             </div>
 
             <div class="form-group" style="display: flex; flex-wrap: wrap;">
-                <input type="text" name="description" placeholder=" Enter Description" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
+                <textarea name="description" placeholder="Enter Description" required style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;"></textarea>
                 <input type="file" name="image1" placeholder=" Add Photos" style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
                 <input type="file" name="image2" placeholder=" Add Photos" style="width: calc(50% - 12px); margin-right: 10px; font-family: 'Arial', FontAwesome;">
                 <input type="file" name="image3" placeholder=" Add Photos" style="width: calc(50% - 12px); font-family: 'Arial', FontAwesome;">
@@ -112,7 +112,32 @@
 <script >
 
 
+    function handleSubmit(event) {
+        event.preventDefault();
+        var formData = new FormData(document.getElementById('carForm'));
 
+
+        fetch('/save-annonce', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+
+                if (response.ok) {
+
+                    alert('Error adding ');
+
+
+                    window.location.href = '/customerads';
+                } else {
+
+                    alert('Annonce Added successfully!');
+                    window.location.href = '/customerads';
+                }
+            })
+
+
+    }
 
 
 

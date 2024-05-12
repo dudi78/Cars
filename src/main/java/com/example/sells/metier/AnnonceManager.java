@@ -13,6 +13,7 @@ public interface AnnonceManager {
      Annonce AddAnnonce(Annonce a);
 
      Annonce findannoncebyid(Integer id);
+     List<Annonce>findallannonces();
      List<Annonce> findCustomerAdsByUsername(String username);
     String saveImage(MultipartFile image2) throws IOException;
 }

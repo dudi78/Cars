@@ -12,6 +12,7 @@
 
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="#">
@@ -38,7 +39,6 @@
         </div>
     </div>
 </nav>
-
 <div class="container" style="margin-top: 4%">
     <div class="row">
         <div class="col-md-8">
@@ -65,33 +65,28 @@
             </div>
             <div class="car-description mt-3">
                 <h4><i class="fas fa-info-circle"></i> Car Description</h4>
-                <p>This car is in excellent condition and has been well-maintained. It comes with all the latest features and technologies, making it a great choice for anyone looking for a reliable and stylish vehicle.</p>
+                <p th:text="${annonce.description}"></p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="car-details">
                 <h4><i class="fas fa-car"></i> Car Details</h4>
-                <p><i class="fas fa-dollar-sign"></i> <strong>Price:</strong> $25,000</p>
-                <p><i class="fas fa-car"></i> <strong>Model:</strong> Accord</p>
-                <p><i class="far fa-calendar-alt"></i> <strong>Year:</strong> 2020</p>
-                <p><i class="fas fa-paint-brush"></i> <strong>Color:</strong> Red</p>
-                <p><i class="fas fa-tachometer-alt"></i> <strong>Mileage:</strong> 20,000 miles</p>
-                <p><i class="fas fa-cogs"></i> <strong>Engine Type:</strong> V6</p>
-                <p><i class="fas fa-cogs"></i> <strong>Transmission:</strong> Automatic</p>
-                <p><i class="fas fa-gas-pump"></i> <strong>Fuel Type:</strong> Petrol</p>
+                <p><i class="fas fa-dollar-sign"></i> <strong>Price:</strong> $<span th:text="${annonce.car.getPrice()}"></span></p>
+                <p><i class="fas fa-car"></i> <strong>Model:</strong> <span th:text="${annonce.car.getModel()}"></span></p>
+                <p><i class="far fa-calendar-alt"></i> <strong>Year:</strong> <span th:text="${annonce.car.getCar_year()}"></span></p>
+                <p><i class="fas fa-paint-brush"></i> <strong>Color:</strong> <span th:text="${annonce.car.getColor()}"></span></p>
+                <p><i class="fas fa-tachometer-alt"></i> <strong>Mileage:</strong> <span th:text="${annonce.car.getMileage()}"></span> miles</p>
+                <p><i class="fas fa-cogs"></i> <strong>Engine Type:</strong> <span th:text="${annonce.car.getEngineType()}"></span></p>
+                <p><i class="fas fa-cogs"></i> <strong>Transmission:</strong> <span th:text="${annonce.car.getTransmission()}"></span></p>
+                <p><i class="fas fa-gas-pump"></i> <strong>Fuel Type:</strong> <span th:text="${annonce.car.getFuelType()}"></span></p>
             </div>
-
-                <div class="owner-profile" style="margin-top: 6%">
-                    <h4><i class="fas fa-user"></i> Owner Profile</h4>
-                    <p><i class="fas fa-user" ></i> <strong>Name:</strong> John</p>
-                    <p><i class="fas fa-user"></i> <strong>Last Name:</strong> Doe</p>
-                    <p><i class="fas fa-phone"></i> <strong>Phone:</strong> +123456789</p>
-                </div>
-
+            <div class="owner-profile" style="margin-top: 6%">
+                <h4><i class="fas fa-user"></i> Owner Profile</h4>
+                <p> <i class="fas fa-user" ></i> <strong>Name:</strong> <span  th:text="${annonce.customer.getFirstName()}"></span> </p>
+                <p><i class="fas fa-user"></i> <strong>Last Name:</strong> <span  th:text="${annonce.customer.getLastName()}"></span></p>
+                <p><i class="fas fa-phone"></i> <strong>Phone:</strong> <span  th:text="${annonce.customer.getPhoneNumber()}"></span></p>
+            </div>
         </div>
-
-        <!-- Owner Profile -->
-
     </div>
 </div>
 

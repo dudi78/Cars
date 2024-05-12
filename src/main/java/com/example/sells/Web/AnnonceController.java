@@ -41,6 +41,16 @@ public class AnnonceController {
         return "annoncesPage";
     }
 
+
+    @GetMapping("/CarDetails/{Id}")
+    public String cardetails(@PathVariable Integer Id, Model model) {
+        Annonce annonce = annonceService.findannoncebyid(Id);
+        model.addAttribute("annonce", annonce);
+        return "Cardetails";
+    }
+
+
+
     @GetMapping("/customerads")
     public String customerAds(Model model) {
 
@@ -181,6 +191,15 @@ public class AnnonceController {
     model.addAttribute("car", car);
 
     return "annoncedisplay";
+}
+
+
+@GetMapping("/ads")
+    public String annoncespage(Model model){
+
+        List<Annonce> Annonces=annonceService.findallannonces();
+        model.addAttribute("annonces",Annonces);
+        return "annoncesPage";
 }
 
 }

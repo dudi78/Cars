@@ -26,9 +26,5 @@ public class PagesController {
 
 
 
-    @GetMapping("/CarDetails")
-    public String cardet(){
-        return"Cardetails";
-    }
 
 }
