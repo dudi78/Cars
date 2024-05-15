@@ -40,6 +40,10 @@ public class AnnonceController {
     public String ads(){
         return "annoncesPage";
     }
+    @GetMapping("/home")
+    public String home(){
+        return "HomePage";
+    }
 
 
     @GetMapping("/CarDetails/{Id}")

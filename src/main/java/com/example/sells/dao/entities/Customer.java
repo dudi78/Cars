@@ -25,6 +25,7 @@ public class Customer  {
     private String lastName;
     private String location;
     private String password;
+    private String role;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<Annonce> announcements;

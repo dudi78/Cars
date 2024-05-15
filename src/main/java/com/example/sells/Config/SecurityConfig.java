@@ -1,5 +1,6 @@
 package com.example.sells.Config;
 
+import com.example.sells.metier.AdminUserDetailsService;
 import com.example.sells.metier.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,70 +19,55 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    private AdminUserDetailsService adminUserDetailsService;
+
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf((csrf) -> csrf.disable())
-                .authorizeRequests((requests) -> requests
-                        .requestMatchers(
-                                "/profile", "/managecar"
-
-                        ).authenticated()
-                        .requestMatchers("/h2-console/",
-                                "/Register","/login","/myhome","/CarDetails","/Annonces","//Sells/uploads/**","/imgs/**","/css/**"
-                        ).permitAll()
-                );
-
-                http.formLogin((form) -> form
+                .csrf(csrf -> csrf.disable())
+                .authorizeRequests(requests -> requests
+                        .requestMatchers("/profile", "/managecar").authenticated()
+                        .requestMatchers("/h2-console/", "/Register", "/login", "/myhome", "/CarDetails", "/Annonces", "/Sells/uploads/**", "/imgs/**", "/css/**").permitAll()
+                        .requestMatchers("/Dashboard").hasRole("ADMIN")
+                )
+                .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/profile", true)
+                        .successHandler((request, response, authentication) -> {
+                            String redirectUrl = authentication.getAuthorities().stream()
+                                    .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN")) ? "/Dashboard" : "/profile";
+                            response.sendRedirect(redirectUrl);
+                        })
                         .permitAll()
-
-
-                );
-                http.logout(logout ->
-                     logout
+                )
+                .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .deleteCookies("JSESSIONID")
-        );
-
-
-
-
+                );
 
         return http.build();
-
-
     }
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService);
+        auth.userDetailsService(adminUserDetailsService);
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
-
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-//
-//        UserDetails admin = User.withUsername("admin")
-//                .password("12345")
-//                .authorities("admin")
-//                .roles("admin")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager( admin);
-//    }
-
 }
