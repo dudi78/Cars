@@ -3,8 +3,616 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+        @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
+        .fa-2x {
+            font-size: 2em;
+        }
+        .fa {
+            position: relative;
+            display: table-cell;
+            width: 60px;
+            height: 36px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 20px;
+        }
+
+        .main-menu:hover, nav.main-menu.expanded {
+            width: 250px;
+            overflow: visible;
+        }
+
+        .main-menu {
+            background: #212121;
+            border-right: 1px solid #e5e5e5;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 60px;
+            overflow: hidden;
+            -webkit-transition: width .05s linear;
+            transition: width .05s linear;
+            -webkit-transform: translateZ(0) scale(1, 1);
+            z-index: 1000;
+        }
+
+        .main-menu>ul {
+            margin: 7px 0;
+        }
+
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+        }
+
+        .main-menu li>a {
+            position: relative;
+            display: table;
+            border-collapse: collapse;
+            border-spacing: 0;
+            color: #999;
+            font-family: arial;
+            font-size: 14px;
+            text-decoration: none;
+            -webkit-transform: translateZ(0) scale(1, 1);
+            -webkit-transition: all .1s linear;
+            transition: all .1s linear;
+        }
+
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 60px;
+            height: 36px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 18px;
+        }
+
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 190px;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .main-menu>ul.logout {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        .no-touch .scrollable.hover {
+            overflow-y: hidden;
+        }
+
+        .no-touch .scrollable.hover:hover {
+            overflow-y: auto;
+            overflow: visible;
+        }
+
+        a:hover, a:focus {
+            text-decoration: none;
+        }
+
+        nav {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+
+        nav ul, nav li {
+            outline: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-menu li:hover>a, nav.main-menu li.active>a, .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus, .no-touch .dashboard-page nav.dashboard-menu ul li:hover a, .dashboard-page nav.dashboard-menu ul li.active a {
+            color: #fff;
+            background-color: #000000;
+        }
+
+        @font-face {
+            font-family: 'Titillium Web';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+        }
+
+        *,
+        :before,
+        :after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+        }
+
+        .container {
+            width: 9.25em;
+            height: 1.15em;
+            font-size: 4rem;
+            font-family: sans-serif;
+            position: relative;
+        }
+
+        .container div {
+            position: absolute;
+            left: 0;
+            text-transform: uppercase;
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+
+        .upper {
+            top: 0;
+            height: 52.5%;
+            color: #fff;
+            overflow: hidden;
+            z-index: 3;
+            animation: moveUp 1.5s ease-in-out 1;
+            background-color: #121212;
+        }
+
+        .lower {
+            bottom: 0;
+            height: 100%;
+            background: linear-gradient(180deg, #121212 52.5%, #fff 52.5%);
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            z-index: 1;
+            animation: moveDown 1.5s ease-in-out 1;
+        }
+
+        .inside {
+            position: absolute;
+            top: 40%;
+            transform: translateY(-40%);
+            text-align: center;
+            z-index: 2;
+            font-size: 1rem;
+            color: #dc143c;
+        }
+
+        @keyframes moveUp {
+            0%,
+            100% {
+                top: 0;
+            }
+            50%,
+            70% {
+                top: -45px;
+            }
+        }
+
+        @keyframes moveDown {
+            0%,
+            100% {
+                top: 0;
+            }
+            50%,
+            70% {
+                top: 30px;
+            }
+        }
+
+        @media (max-width: 424px) {
+            .container {
+                font-size: 2.5rem;
+            }
+
+            .inside {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .container {
+                font-size: 2rem;
+            }
+
+            .inside {
+                font-size: 0.5rem;
+            }
+        }
+
+        .section {
+            height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+        }
+
+        .section.active {
+            display: flex;
+        }
+
+
+
+
+        .type--A{
+            --line_color : #555555 ;
+            --back_color : #FFECF6  ;
+        }
+        .type--B{
+            --line_color : #1b1919 ;
+            --back_color : #E9ECFF
+        }
+        .type--C{
+            --line_color : #00135C ;
+            --back_color : #DEFFFA
+        }
+        .button{
+            position : relative ;
+            z-index : 0 ;
+            width : 240px ;
+            height : 56px ;
+            text-decoration : none ;
+            font-size : 14px ;
+            font-weight : bold ;
+            color : var(--line_color) ;
+            letter-spacing : 2px ;
+            transition : all .3s ease ;
+        }
+        .button__text{
+            display : flex ;
+            justify-content : center ;
+            align-items : center ;
+            width : 100% ;
+            height : 100% ;
+        }
+        .button::before,
+        .button::after,
+        .button__text::before,
+        .button__text::after{
+            content : '' ;
+            position : absolute ;
+            height : 3px ;
+            border-radius : 2px ;
+            background : var(--line_color) ;
+            transition : all .5s ease ;
+        }
+        .button::before{
+            top : 0 ;
+            left : 54px ;
+            width : calc( 100% - 56px * 2 - 16px ) ;
+        }
+        .button::after{
+            top : 0 ;
+            right : 54px ;
+            width : 8px ;
+        }
+        .button__text::before{
+            bottom : 0 ;
+            right : 54px ;
+            width : calc( 100% - 56px * 2 - 16px ) ;
+        }
+        .button__text::after{
+            bottom : 0 ;
+            left : 54px ;
+            width : 8px ;
+        }
+        .button__line{
+            position : absolute ;
+            top : 0 ;
+            width : 56px ;
+            height : 100% ;
+            overflow : hidden ;
+        }
+        .button__line::before{
+            content : '' ;
+            position : absolute ;
+            top : 0 ;
+            width : 150% ;
+            height : 100% ;
+            box-sizing : border-box ;
+            border-radius : 300px ;
+            border : solid 3px var(--line_color) ;
+        }
+        .button__line:nth-child(1),
+        .button__line:nth-child(1)::before{
+            left : 0 ;
+        }
+        .button__line:nth-child(2),
+        .button__line:nth-child(2)::before{
+            right : 0 ;
+        }
+        .button:hover{
+            letter-spacing : 6px ;
+        }
+        .button:hover::before,
+        .button:hover .button__text::before{
+            width : 8px ;
+        }
+        .button:hover::after,
+        .button:hover .button__text::after{
+            width : calc( 100% - 56px * 2 - 16px ) ;
+        }
+        .button__drow1,
+        .button__drow2{
+            position : absolute ;
+            z-index : -1 ;
+            border-radius : 16px ;
+            transform-origin : 16px 16px ;
+        }
+        .button__drow1{
+            top : -16px ;
+            left : 40px ;
+            width : 32px ;
+            height : 0;
+            transform : rotate( 30deg ) ;
+        }
+        .button__drow2{
+            top : 44px ;
+            left : 77px ;
+            width : 32px ;
+            height : 0 ;
+            transform : rotate(-127deg ) ;
+        }
+        .button__drow1::before,
+        .button__drow1::after,
+        .button__drow2::before,
+        .button__drow2::after{
+            content : '' ;
+            position : absolute ;
+        }
+        .button__drow1::before{
+            bottom : 0 ;
+            left : 0 ;
+            width : 0 ;
+            height : 32px ;
+            border-radius : 16px ;
+            transform-origin : 16px 16px ;
+            transform : rotate( -60deg ) ;
+        }
+        .button__drow1::after{
+            top : -10px ;
+            left : 45px ;
+            width : 0 ;
+            height : 32px ;
+            border-radius : 16px ;
+            transform-origin : 16px 16px ;
+            transform : rotate( 69deg ) ;
+        }
+        .button__drow2::before{
+            bottom : 0 ;
+            left : 0 ;
+            width : 0 ;
+            height : 32px ;
+            border-radius : 16px ;
+            transform-origin : 16px 16px ;
+            transform : rotate( -146deg ) ;
+        }
+        .button__drow2::after{
+            bottom : 26px ;
+            left : -40px ;
+            width : 0 ;
+            height : 32px ;
+            border-radius : 16px ;
+            transform-origin : 16px 16px ;
+            transform : rotate( -262deg ) ;
+        }
+        .button__drow1,
+        .button__drow1::before,
+        .button__drow1::after,
+        .button__drow2,
+        .button__drow2::before,
+        .button__drow2::after{
+            background : var( --back_color ) ;
+        }
+        .button:hover .button__drow1{
+            animation : drow1 ease-in .06s ;
+            animation-fill-mode : forwards ;
+        }
+        .button:hover .button__drow1::before{
+            animation : drow2 linear .08s .06s ;
+            animation-fill-mode : forwards ;
+        }
+        .button:hover .button__drow1::after{
+            animation : drow3 linear .03s .14s ;
+            animation-fill-mode : forwards ;
+        }
+        .button:hover .button__drow2{
+            animation : drow4 linear .06s .2s ;
+            animation-fill-mode : forwards ;
+        }
+        .button:hover .button__drow2::before{
+            animation : drow3 linear .03s .26s ;
+            animation-fill-mode : forwards ;
+        }
+        .button:hover .button__drow2::after{
+            animation : drow5 linear .06s .32s ;
+            animation-fill-mode : forwards ;
+        }
+        @keyframes drow1{
+            0%   { height : 0 ; }
+            100% { height : 100px ; }
+        }
+        @keyframes drow2{
+            0%   { width : 0 ; opacity : 0 ;}
+            10%  { opacity : 0 ;}
+            11%  { opacity : 1 ;}
+            100% { width : 120px ; }
+        }
+        @keyframes drow3{
+            0%   { width : 0 ; }
+            100% { width : 80px ; }
+        }
+        @keyframes drow4{
+            0%   { height : 0 ; }
+            100% { height : 120px ; }
+        }
+        @keyframes drow5{
+            0%   { width : 0 ; }
+            100% { width : 124px ; }
+        }
+
+
+
+    </style>
 </head>
 <body>
+
+<nav class="main-menu">
+    <ul>
+        <li>
+            <a href="#first" onclick="showSection(event, 'first')">
+                <i class="fa fa-home fa-2x"></i>
+                <span class="nav-text">Manage Announces</span>
+            </a>
+        </li>
+        <li class="has-subnav">
+            <a href="#second" onclick="showSection(event, 'second')">
+                <i class="fa fa-globe fa-2x"></i>
+                <span class="nav-text">Global Surveyors</span>
+            </a>
+        </li>
+        <li class="has-subnav">
+            <a href="#third" onclick="showSection(event, 'third')">
+                <i class="fa fa-comments fa-2x"></i>
+                <span class="nav-text">Group Hub Forums</span>
+            </a>
+        </li>
+        <li class="has-subnav">
+            <a href="#photos" onclick="showSection(event, 'photos')">
+                <i class="fa fa-camera-retro fa-2x"></i>
+                <span class="nav-text">Survey Photos</span>
+            </a>
+        </li>
+        <li>
+            <a href="#tutorials" onclick="showSection(event, 'tutorials')">
+                <i class="fa fa-film fa-2x"></i>
+                <span class="nav-text">Surveying Tutorials</span>
+            </a>
+        </li>
+        <li>
+            <a href="#jobs" onclick="showSection(event, 'jobs')">
+                <i class="fa fa-book fa-2x"></i>
+                <span class="nav-text">Surveying Jobs</span>
+            </a>
+        </li>
+        <li>
+            <a href="#tools" onclick="showSection(event, 'tools')">
+                <i class="fa fa-cogs fa-2x"></i>
+                <span class="nav-text">Tools & Resources</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="logout">
+        <li>
+            <a href="/logout">
+                <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text">Logout</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<div class="welcome-container">
+    <div class="container">
+        <div class="upper">Welcome Admin</div>
+        <div class="lower">Welcome Admin</div>
+        <div class="inside">Start Managing</div>
+    </div>
+</div>
+
+<div class="section" id="first">
+    <a th:href="@{/getlistAnnnonces}"  class="button type--A" >
+        <div class="button__line"></div>
+        <div class="button__line"></div>
+        <span class="button__text">ENTRY</span>
+        <div class="button__drow1"></div>
+        <div class="button__drow2"></div>
+    </a>
+</div>
+
+
+
+
+<div class="section" id="second">
+    <div class="container">
+        <div class="upper">Global Surveyors</div>
+        <div class="lower">Global Surveyors</div>
+        <div class="inside">Manage global data</div>
+    </div>
+</div>
+
+<div class="section" id="third">
+    <div class="container">
+        <div class="upper">Group Hub Forums</div>
+        <div class="lower">Group Hub Forums</div>
+        <div class="inside">Manage forums</div>
+    </div>
+</div>
+
+<div class="section" id="photos">
+    <div class="container">
+        <div class="upper">Survey Photos</div>
+        <div class="lower">Survey Photos</div>
+        <div class="inside">Manage photos</div>
+    </div>
+</div>
+
+<div class="section" id="tutorials">
+    <div class="container">
+        <div class="upper">Surveying Tutorials</div>
+        <div class="lower">Surveying Tutorials</div>
+        <div class="inside">Manage tutorials</div>
+    </div>
+</div>
+
+<div class="section" id="jobs">
+    <div class="container">
+        <div class="upper">Surveying Jobs</div>
+        <div class="lower">Surveying Jobs</div>
+        <div class="inside">Manage jobs</div>
+    </div>
+</div>
+
+<div class="section" id="tools">
+    <div class="container">
+        <div class="upper">Tools & Resources</div>
+        <div class="lower">Tools & Resources</div>
+        <div class="inside">Manage tools</div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+
+    function showSection(event, sectionId) {
+        event.preventDefault();
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active'); // Remove active class from all sections
+        });
+        document.getElementById(sectionId).classList.add('active'); // Add active class to clicked section
+
+        // Hide the welcome message
+        const welcomeContainer = document.querySelector('.welcome-container');
+        if (welcomeContainer) {
+            welcomeContainer.style.display = 'none';
+        }
+    }
+
+</script>
 
 </body>
 </html>

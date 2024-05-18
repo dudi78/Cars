@@ -19,4 +19,7 @@ public class CarController {
         boolean b= cm.deleteCarAndAssociatedAnnonce(carId);
         return "redirect:/customerads";
     }
+
+
+
 }

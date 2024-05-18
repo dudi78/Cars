@@ -22,18 +22,26 @@
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{'/login'}">Login</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" th:href="@{'/ads'}">Refresh</a>
                 </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link" th:href="@{'/profile'}">Profile</a>
+                </li>
+                <li class="nav-item" th:unless="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link" th:href="@{'/login'}">Login</a>
+                </li>
+                <li class="nav-item" th:unless="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link" th:href="@{'/Register'}">Register</a>
+                </li>
+
             </ul>
         </div>
     </div>
 </nav>
+
 <div class="search-section">
     <div class="container">
-        <form class="search-form">
+        <form th:action="@{/adsadmin}" method="get">
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="price">Price:</label>
@@ -90,12 +98,15 @@
     </div>
 </div>
 
+<div th:if="${#lists.isEmpty(annonces)}" class="alert alert-primary" role="alert" style="width: 600px; margin-left: 25%">
+   Hi! There is  No annonces to Display At the moment Wait till Users Start Adding
+</div>
 
-<div class="container mt-5">
+<div class="container mt-5" th:unless="${#lists.isEmpty(annonces)}">
     <h1 class="mb-4" style="text-align: center; font-family: 'Segoe UI', sans-serif;">Car Advertisements</h1>
 
     <div class="row">
-        <div th:each="an, iterStat : ${annonces}" class="col-md-4 mb-4">
+        <div th:each="an, iterStat : ${annonces}" class="col-md-4 mb-4" th:if="${an.approved}">
             <div class="card">
                 <div th:id="'carouselExampleControls' + ${iterStat.count}" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">

@@ -6,6 +6,9 @@ import com.example.sells.dao.entities.Annonce;
 
 import com.example.sells.dao.entities.Car;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -71,5 +74,13 @@ private static final String UPLOAD_DIR = "uploads/";
         return filePath.toString();
     }
 
+    @Override
+    public Page<Annonce> getAllAnnonces(int page, int taille) {
+        return ar.findAll(PageRequest.of(page, taille));
+    }
 
+    public Page<Annonce> searchAnnonces(int page, int size, Integer price, String modelParam, Integer carYear, String color, Integer mileage, String engineType, String transmission, String fuelType) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ar.findByCriteria(pageable, price, modelParam, carYear, color, mileage, engineType, transmission, fuelType);
+    }
 }

@@ -7,8 +7,10 @@ import com.example.sells.metier.AnnonceManager;
 import com.example.sells.metier.CarManage;
 import com.example.sells.metier.CustomUserDetailsService;
 import com.example.sells.metier.CustomerManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -140,6 +142,8 @@ public class AnnonceController {
             car.setTransmission(transmission);
             car.setFuelType(fuelType);
             car.setAnnonce(existingAnnonce);
+            car.setState(false);
+            car.setRejectionCase(false);
             cm.AddCar(car);
 
 
@@ -176,6 +180,8 @@ public class AnnonceController {
             car.setTransmission(transmission);
             car.setFuelType(fuelType);
             car.setAnnonce(savedannonce);
+            car.setState(false);
+            car.setRejectionCase(false);
             cm.AddCar(car);
 
 
@@ -206,6 +212,85 @@ public class AnnonceController {
         return "annoncesPage";
 }
 
+    @GetMapping("/getlistAnnnonces")
+    public String annoncespage2( Model model , @RequestParam(name = "page", defaultValue = "0" ) int page,
+                                 @RequestParam(name = "taille", defaultValue = "5" ) int taille) {
+
+
+        Page<Annonce> AllAnnonces= annonceService.getAllAnnonces(page,taille);
+        model.addAttribute("listAnnnonces",AllAnnonces.getContent());
+        int[] pages = new int[AllAnnonces.getTotalPages()];
+        model.addAttribute("pages" , pages);
+        model.addAttribute("currentpage", page);
+        return "Approveads";
+    }
+
+    @GetMapping("/ApproveAnnonce/{Id}")
+    public String appdet(@PathVariable Integer Id, Model model) {
+        Annonce annonce = annonceService.findannoncebyid(Id);
+        model.addAttribute("annonce", annonce);
+        return "CarApprove";
+    }
+
+
+
+
+@PostMapping ("/setapprove")
+    public String setapprove(@RequestParam("id") Integer id ){
+
+       Annonce an=  annonceService.findannoncebyid(id);
+       an.setApproved(true);
+       an.getCar().setState(true);
+       annonceService.AddAnnonce(an);
+        return"redirect:getlistAnnnonces";
+
 }
+    @PostMapping ("/setstate")
+    public String setstate(@RequestParam("id") Integer id ){
+
+        Annonce an=  annonceService.findannoncebyid(id);
+
+        an.getCar().setState(false);
+        an.getCar().setRejectionCase(true);
+        annonceService.AddAnnonce(an);
+        return"redirect:getlistAnnnonces";
+
+    }
+
+
+
+    @GetMapping("/adsadmin")
+    public String annoncespage(Model model,
+                               @RequestParam(name = "page", defaultValue = "0") int page,
+                               @RequestParam(name = "taille", defaultValue = "5") int taille,
+                               @RequestParam(name = "price", required = false) Integer price,
+                               @RequestParam(name = "model", required = false) String modelParam,
+                               @RequestParam(name = "car_year", required = false) Integer carYear,
+                               @RequestParam(name = "color", required = false) String color,
+                               @RequestParam(name = "mileage", required = false) Integer mileage,
+                               @RequestParam(name = "engineType", required = false) String engineType,
+                               @RequestParam(name = "transmission", required = false) String transmission,
+                               @RequestParam(name = "fuelType", required = false) String fuelType) {
+
+        Page<Annonce> allAnnonces;
+
+        if (price != null || modelParam != null || carYear != null || color != null || mileage != null || engineType != null || transmission != null || fuelType != null) {
+            allAnnonces = annonceService.searchAnnonces(page, taille, price, modelParam, carYear, color, mileage, engineType, transmission, fuelType);
+        } else {
+            allAnnonces = annonceService.getAllAnnonces(page, taille);
+        }
+
+        model.addAttribute("annonces", allAnnonces.getContent());
+        int[] pages = new int[allAnnonces.getTotalPages()];
+        model.addAttribute("pages", pages);
+        model.addAttribute("currentpage", page);
+        return "CriteriaAnnonces";
+    }
+
+    }
+
+
+
+
 
 

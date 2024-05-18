@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="/css/home.css" >
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body>
 
@@ -13,8 +15,15 @@
 
 <nav   class="navbar" >
     <ul class="nav-list">
-        <li><a th:href="@{'/Register'}">Register</a></li>
-        <li><a th:href="@{'/login'}">Login</a></li>
+        <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+             <a class="nav-link" th:href="@{'/profile'}"><i class='fas fa-user-alt'></i>Profile</a>
+        </li>
+        <li class="nav-item" th:unless="${#authorization.expression('isAuthenticated()')}">
+            <a class="nav-link" th:href="@{'/login'}">Login</a>
+        </li>
+        <li class="nav-item" th:unless="${#authorization.expression('isAuthenticated()')}">
+            <a th:href="@{'/Register'}">Register</a>
+        </li>
         <li><a th:href="@{'/About'}">About</a></li>
         <li><a th:href="@{'/ads'}">Cars</a></li>
     </ul>

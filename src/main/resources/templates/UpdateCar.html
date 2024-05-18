@@ -56,7 +56,11 @@
         </form>
     </div>
 </div>
-<div th:each="ad : ${customerAds}" th:if="${ad.car != null}" style="margin-left: 14%; width: 1000px;">
+<div th:if="${#lists.isEmpty(customerAds)}"  role="alert" style="width: 600px; margin-left: 26% ; font-family:'Arial Black'">
+    Hi! There is  No annonces to Display At the moment , Start Adding
+</div>
+
+<div  th:unless="${#lists.isEmpty(customerAds)}" th:each="ad : ${customerAds}" th:if="${ad.car != null}" style="margin-left: 14%; width: 1000px;">
     <div class="card">
         <img src="/imgs/BWM.jpg" alt="Car Image" class="card-img">
         <div class="card-details">
@@ -96,6 +100,18 @@
                 <i class="fas fa-engine"></i> <!-- Engine icon -->
                 <span th:text="'EngineType: ' + ${ad.car.getEngineType()}"></span>
             </p>
+            <p>
+                <i class="fas fa-engine"></i> <!-- Engine icon -->
+                <span th:if="${ad.getCar().getRejectionCase()}" th:text="'Rejected'" style="color: red;"><i class="fa fa-close"></i></span>
+                <span th:if="${ad.getCar().getRejectionCase()}" ><i class="fa fa-close"></i></span>
+                <span th:if="${!ad.getCar().getRejectionCase()}">
+                <span th:text="${ad.car.getState() ? 'Approved' : 'Pending'}" th:style="${ad.car.getState() ? 'color: green;' : 'color: red;'}"></span>
+               <span th:if="${!ad.car.getState()}"><i class='far fa-clock' style="color: red"></i></span>
+               <span th:if="${ad.car.getState()}"><i class="fas fa-check-square" style="color: green"></i></span>
+          </span>
+            </p>
+
+
             <div class="card-buttons">
                 <a th:href="@{'/deleteannonce/' + ${ad.car.getId()}}" class="button">Delete</a>
                 <a th:href="@{'/Updateannonce/' + ${ad.getId()}} " class="button">Update</a>

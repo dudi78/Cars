@@ -25,6 +25,7 @@ public class Car {
     private String transmission;
     private String fuelType;
     private Boolean State;
+    private Boolean RejectionCase;
     @OneToOne
     private Annonce annonce;
 
